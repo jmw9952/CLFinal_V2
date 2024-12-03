@@ -49,9 +49,13 @@
 
 let rows;
 let cols;
-let spacing = 30; // Adjusted for better visibility of circles
+let spacing = 20; // Adjusted for better visibility of circles
+let handpose;
+let video;
+let hands = [];
 
-function preload(){
+
+function preload() {
     handPose = ml5.handPose();
 }
 
@@ -60,6 +64,15 @@ function setup() {
 
     rows = height / spacing;
     cols = width / spacing;
+
+    // Create the video and hide it
+    video = createCapture(VIDEO);
+    video.size(windowWidth, windowHeight);
+    video.hide();
+
+    // Start detecting hands from the webcam video
+    handPose.detectStart(video, gotHands);
+
 }
 
 function draw() {
@@ -72,17 +85,32 @@ function draw() {
             let x = spacing / 2 + i * spacing;
             let y = spacing / 2 + j * spacing;
 
-            // Check if the mouse is over the current circle
-            let d = dist(mouseX, mouseY, x, y);
-            if (d < spacing / 2) {
-                fill(255, 0, 0); // Change color to red on mouseover
-            } else {
-                fill(0, 0, 255); // Default color (blue)
+
+            // Draw all the tracked hand points
+            for (let hi = 0; hi < hands.length; hi++) {
+                let hand = hands[hi];
+                for (let hj = 0; hj < hand.keypoints.length; hj++) {
+                    let keypoint = hand.keypoints[hj];
+                    // Check if the mouse is over the current circle
+                    let d = dist(keypoint.x, keypoint.y, x, y);
+                    if (d < spacing / 2) {
+                        fill(255, 0, 0); // Change color to red on mouseover
+                    } else {
+                        fill(0, 0, 255); // Default color (blue)
+                    }
+
+                    // Draw the circle
+                    noStroke();
+                    ellipse(x, y, spacing, spacing);
+                }
             }
 
-            // Draw the circle
-            noStroke();
-            ellipse(x, y, spacing, spacing);
         }
     }
+}
+
+// Callback function for when handPose outputs data
+function gotHands(results) {
+    // Save the output to the hands variable
+    hands = results;
 }
