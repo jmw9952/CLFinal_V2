@@ -85,7 +85,8 @@ function draw() {
             let x = spacing / 2 + i * spacing;
             let y = spacing / 2 + j * spacing;
 
-
+            fill(0, 0, 255); // Initial color: Blue
+            ellipse(spacing / 2 + i * spacing, spacing / 2 + j * spacing, spacing, spacing);
             // Draw all the tracked hand points
             for (let hi = 0; hi < hands.length; hi++) {
                 let hand = hands[hi];
