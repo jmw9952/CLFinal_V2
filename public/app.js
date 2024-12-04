@@ -85,6 +85,7 @@ function draw() {
             let x = spacing / 2 + i * spacing;
             let y = spacing / 2 + j * spacing;
 
+            noStroke();
             fill(0, 0, 255); // Initial color: Blue
             ellipse(spacing / 2 + i * spacing, spacing / 2 + j * spacing, spacing, spacing);
             // Draw all the tracked hand points
@@ -92,6 +93,7 @@ function draw() {
                 let hand = hands[hi];
                 for (let hj = 0; hj < hand.keypoints.length; hj++) {
                     let keypoint = hand.keypoints[hj];
+
                     // Check if the mouse is over the current circle
                     let d = dist(keypoint.x, keypoint.y, x, y);
                     if (d < spacing / 2) {
@@ -113,5 +115,8 @@ function draw() {
 // Callback function for when handPose outputs data
 function gotHands(results) {
     // Save the output to the hands variable
-    hands = results;
+    // if (results.length > 0) {
+        // console.log(results[0]);
+        hands = results;
+    // }
 }
