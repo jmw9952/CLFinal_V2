@@ -78,6 +78,9 @@ function setup() {
 function draw() {
     background(255);
 
+    noStroke();
+            fill(0, 0, 255); // Initial color: Blue
+            ellipse(spacing / 2 + i * spacing, spacing / 2 + j * spacing, spacing, spacing);
     // Loop through the grid to draw each circle
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
