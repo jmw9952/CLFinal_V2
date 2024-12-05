@@ -116,7 +116,7 @@ function draw() {
 function gotHands(results) {
     // Save the output to the hands variable
     // if (results.length > 0) {
-        // console.log(results[0]);
+        console.log(results[0]);
         hands = results;
     // }
 }
