@@ -115,8 +115,8 @@ function draw() {
 // Callback function for when handPose outputs data
 function gotHands(results) {
     // Save the output to the hands variable
-    // if (results.length > 0) {
+    if (results.length > 0) {
         console.log(results[0]);
         hands = results;
-    // }
+    }
 }
