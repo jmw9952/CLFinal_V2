@@ -1,3 +1,9 @@
+// Initialize socket connection
+let socket = io();
+socket.on('connect', function () {
+    console.log("Connected");
+});
+
 let rows;
 let cols;
 let spacing = 20; // Adjusted for better visibility of circles
@@ -22,6 +28,8 @@ function setup() {
     // Create the video and hide it
     video = createCapture(VIDEO);
     video.size(windowWidth, windowHeight);
+    frameRate(5);
+    spacing = height / 20
     video.hide();
 
     // Start detecting hands from the webcam video
