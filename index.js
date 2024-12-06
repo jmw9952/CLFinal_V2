@@ -23,7 +23,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('hand', function (data) {
         //Data can be numbers, strings, objects
         console.log("Received hand");
-        console.log(data);
+        // console.log(data);
 
         //Send a response to all clients, including this one
         // io.sockets.emit('hand', data);
@@ -32,4 +32,8 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('guest-hand', data);
     })
 
+    socket.on('guest-hand-points', function(points) {
+        console.log(points);
+        socket.broadcast.emit('guest-hand-points', points);
+    })
 })

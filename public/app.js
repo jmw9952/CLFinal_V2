@@ -29,7 +29,7 @@ function setup() {
     video = createCapture(VIDEO);
     video.size(windowWidth, windowHeight);
     frameRate(5);
-    spacing = height / 20
+    spacing = 40;
     video.hide();
 
     // Start detecting hands from the webcam video
@@ -82,6 +82,13 @@ function checkHandKeyPoints() {
                 if (d < detectionSpacing) {
                     fill(255, 0, 0);
                     ellipse(gridPoints[k].x, gridPoints[k].y, spacing, spacing);
+                    let points = {
+                        x: gridPoints[k].x,
+                        y: gridPoints[k].y,
+
+                    }
+                    socket.emit('guest-hand-points', points);
+
                 }
             }
         }
@@ -109,6 +116,8 @@ function drawGrid() {
     gridStart = false;
 }
 
-socket.on('guest-hand', function(data){
+socket.on('guest-hand-points', function (points) {
     console.log("guest hand found");
+    fill(0, 255, 0);
+    ellipse(points.x, points.y, spacing, spacing);
 })
