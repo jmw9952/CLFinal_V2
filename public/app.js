@@ -15,6 +15,8 @@ let hands = [];
 let gridPoints = [];
 let gridStart = true;
 
+let points;
+
 function preload() {
     handPose = ml5.handPose();
 }
@@ -57,6 +59,11 @@ function draw() {
     }
     // Restore the transformation state
     pop();
+
+    // if (points != null) {
+    //     fill(0, 255, 0);
+    //     ellipse(points.x, points.y, spacing, spacing);
+    // }
 }
 
 // Callback function for when handPose outputs data
@@ -85,10 +92,8 @@ function checkHandKeyPoints() {
                     let points = {
                         x: gridPoints[k].x,
                         y: gridPoints[k].y,
-
                     }
                     socket.emit('guest-hand-points', points);
-
                 }
             }
         }
@@ -117,7 +122,8 @@ function drawGrid() {
 }
 
 socket.on('guest-hand-points', function (points) {
-    console.log("guest hand found");
-    fill(0, 255, 0);
-    ellipse(points.x, points.y, spacing, spacing);
+    // points = data
+    //     console.log("guest hand found");
+        fill(0, 255, 0);
+        ellipse(points.x, points.y, spacing, spacing);
 })
