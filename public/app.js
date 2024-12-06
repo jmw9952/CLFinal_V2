@@ -53,6 +53,7 @@ function draw() {
     drawGrid();
     if (hands.length > 0) {
         checkHandKeyPoints();
+        socket.emit('hand', true);
     }
     // Restore the transformation state
     pop();
@@ -73,9 +74,9 @@ function checkHandKeyPoints() {
         let hand = hands[i];
         for (let j = 0; j < hand.keypoints.length; j++) {
             let keypoint = hand.keypoints[j];
-            console.log(keypoint);
+            // console.log(keypoint);
             for (let k = 0; k < gridPoints.length; k++) {
-                console.log(gridPoints[k]);
+                // console.log(gridPoints[k]);
                 let d = dist(keypoint.x, keypoint.y, gridPoints[k].x, gridPoints[k].y);
                 //console.log(d);
                 if (d < detectionSpacing) {
@@ -107,3 +108,7 @@ function drawGrid() {
     }
     gridStart = false;
 }
+
+socket.on('guest-hand', function(data){
+    console.log("guest hand found");
+})

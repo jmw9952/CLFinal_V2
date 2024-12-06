@@ -16,7 +16,20 @@ let io = require('socket.io');
 io = new io.Server(server);
 
 //Listen for individual clients/users to connect
-io.sockets.on('connection', function(socket) {
+io.sockets.on('connection', function (socket) {
     console.log("We have a new client: " + socket.id);
+
+    //Listen for a message named 'data' from this client
+    socket.on('hand', function (data) {
+        //Data can be numbers, strings, objects
+        console.log("Received hand");
+        console.log(data);
+
+        //Send a response to all clients, including this one
+        // io.sockets.emit('hand', data);
+
+        //Send a response to all other clients, not including this one
+        socket.broadcast.emit('guest-hand', data);
+    })
 
 })
