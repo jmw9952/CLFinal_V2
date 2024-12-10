@@ -7,3 +7,36 @@ body {
 canvas {
   display: block;
 }
+
+.intro-bubble {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    text-align: center;
+    font-family: 'Doto', sans-serif;
+    font-weight: 700;
+}
+
+.intro-bubble button {
+    padding: 8px 16px;
+    background: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.intro-bubble button:hover {
+    background: #0052cc;
+}
+
+.hidden {
+    display: none;
+}

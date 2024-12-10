@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="style.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
 </head>
+
 <body>
-    
+    <div id="intro-bubble" class="intro-bubble">
+        <p>Wave your hand to interact with the dots.</p>
+        <p>For the best experience, position your hand ~2 feet away from the screen.</p>
+        <button onclick="hideIntro()">Let's Play!</button>
+    </div>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>

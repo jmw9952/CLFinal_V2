@@ -124,6 +124,10 @@ function drawGrid() {
 socket.on('guest-hand-points', function (points) {
     // points = data
     //     console.log("guest hand found");
-        fill(0, 255, 0);
+        fill(128, 0, 128);
         ellipse(points.x, points.y, spacing, spacing);
 })
+
+function hideIntro() {
+    document.getElementById('intro-bubble').classList.add('hidden');
+}
