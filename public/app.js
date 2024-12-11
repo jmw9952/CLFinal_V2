@@ -55,7 +55,12 @@ function draw() {
     drawGrid();
     if (hands.length > 0) {
         checkHandKeyPoints();
-        socket.emit('hand', true);
+        socket.emit('hand', { "guestData": hands });
+        // socket.emit('hand', true);
+    }
+    if (curTime < 30 && guestHands){
+        drawGuestHands(guestHands);
+        curTime++
     }
     // Restore the transformation state
     pop();
@@ -93,7 +98,7 @@ function checkHandKeyPoints() {
                         x: gridPoints[k].x,
                         y: gridPoints[k].y,
                     }
-                    socket.emit('guest-hand-points', points);
+                    // socket.emit('guest-hand-points', points);
                 }
             }
         }
@@ -130,4 +135,38 @@ socket.on('guest-hand-points', function (points) {
 
 function hideIntro() {
     document.getElementById('intro-bubble').classList.add('hidden');
+}
+
+let guestHands;
+let curTime = 0;
+
+socket.on('guest-hand', function (data) {
+    guestHands = data.guestData;
+    curTime = 0;
+    console.log("guest!");
+});
+
+function drawGuestHands(hands) {
+    // Draw all the tracked hand points
+    for (let i = 0; i < hands.length; i++) {
+        let hand = hands[i];
+        for (let j = 0; j < hand.keypoints.length; j++) {
+            let keypoint = hand.keypoints[j];
+            // console.log(keypoint);
+            for (let k = 0; k < gridPoints.length; k++) {
+                // console.log(gridPoints[k]);
+                let d = dist(keypoint.x, keypoint.y, gridPoints[k].x, gridPoints[k].y);
+                //console.log(d);
+                if (d < detectionSpacing) {
+                    fill(128, 0, 128);
+                    ellipse(gridPoints[k].x, gridPoints[k].y, spacing, spacing);
+                    let points = {
+                        x: gridPoints[k].x,
+                        y: gridPoints[k].y,
+                    }
+                    //socket.emit('guest-hand-points', points);
+                }
+            }
+        }
+    }
 }

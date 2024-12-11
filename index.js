@@ -33,7 +33,7 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on('guest-hand-points', function(points) {
-        console.log(points);
+        // console.log(points);
         socket.broadcast.emit('guest-hand-points', points);
     })
 })
